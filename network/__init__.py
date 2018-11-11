@@ -18,6 +18,12 @@ def resnet50(classes, pretrain=True):
         net = models.resnet50(pretrained=True)
     else:
         net = models.resnet50()
-    net.avgpool = nn.AdaptiveAvgPool2d(1)
+# =============================================================================
+#     resnet50 default:
+#     (avgpool): AvgPool2d(kernel_size=7, stride=1, padding=0)
+#     (fc): Linear(in_features=2048, out_features=1000, bias=True)
+#     net.avgpool = nn.AdaptiveAvgPool2d(1)
+#     class Linear(Module)-->in_features =2048
+# =============================================================================
     net.fc = nn.Linear(net.fc.in_features, classes)
     return net
